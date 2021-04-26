@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import addAuthor from './helpers/data/AuthorData';
+import PropTypes from 'prop-types';
+import { addAuthor } from './helpers/data/AuthorData';
 
-export default function AuthorForm() {
+const AuthorForm = ({ formTitle }) => {
   const [author, setAuthor] = useState({
     email: '',
     favorite: false,
@@ -30,7 +31,7 @@ export default function AuthorForm() {
           autoComplete='off'
           onSubmit={handleSubmit}
         >
-         <h2>Author Form</h2>
+         <h2>{formTitle}</h2>
           <label>Email:</label>
           <input
             name='email'
@@ -59,8 +60,8 @@ export default function AuthorForm() {
           <input
             name='favorite'
             type='checkbox'
-            placeholder='false'
-            value={author.favorite}
+            checked=''
+            value={author.favorite && 'checked'}
             onChange={handleInputChange}>
           </input>
           <button
@@ -71,4 +72,10 @@ export default function AuthorForm() {
       </div>
     </>
   );
-}
+};
+
+AuthorForm.propTypes = {
+  formTitle: PropTypes.string.isRequired
+};
+
+export default AuthorForm;
