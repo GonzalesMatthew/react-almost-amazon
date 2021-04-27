@@ -2,7 +2,7 @@ import firebase from 'firebase';
 import React, { useEffect, useState } from 'react';
 import firebaseConfig from '../helpers/apiKeys';
 import { getAuthors } from '../helpers/data/AuthorData';
-import AuthorForm from '../AuthorForm';
+import AuthorForm from '../components/AuthorForm';
 import AuthorCard from '../components/AuthorCard';
 import './App.scss';
 
@@ -17,14 +17,18 @@ function App() {
 
   return (
     <div className='App'>
-      <AuthorForm formTitle='Author Form'/>
+      <AuthorForm
+        formTitle='Author Form'
+        setAuthors={setAuthors}/>
       <hr/>
       {authors.map((authorInfo) => (
-       <AuthorCard key={authorInfo.firebaseKey}
-        firstName={authorInfo.first_name}
-        lastName={authorInfo.last_name}
-        favorite={authorInfo.favorite}
-        handleClick={() => console.warn(`${authorInfo.first_name} ${authorInfo.last_name} is a good author.`)}
+       <AuthorCard
+          key={authorInfo.firebaseKey}
+          firebaseKey={authorInfo.firebaseKey}
+          firstName={authorInfo.first_name}
+          lastName={authorInfo.last_name}
+          // favorite={authorInfo.favorite}
+          setAuthors={setAuthors}
         />
       ))}
     </div>

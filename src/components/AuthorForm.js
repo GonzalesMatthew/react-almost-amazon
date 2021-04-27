@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { addAuthor } from './helpers/data/AuthorData';
+import { addAuthor } from '../helpers/data/AuthorData';
 
-const AuthorForm = ({ formTitle }) => {
-  const [author, setAuthor] = useState({
-    email: '',
-    favorite: false,
-    firebaseKey: '',
-    first_name: '',
-    last_name: ''
-  });
+const AuthorForm = ({ formTitle, setAuthors }) => {
+  const [author, setAuthor] = useState(
+    {
+      email: '',
+      // favorite: false,
+      firebaseKey: '',
+      first_name: '',
+      last_name: ''
+    }
+  );
 
   const handleInputChange = (e) => {
     setAuthor((prevState) => ({
@@ -20,7 +22,7 @@ const AuthorForm = ({ formTitle }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addAuthor(author);
+    addAuthor(author).then((authorsArray) => setAuthors(authorsArray));
   };
 
   return (
@@ -56,14 +58,14 @@ const AuthorForm = ({ formTitle }) => {
             value={author.last_name}
             onChange={handleInputChange}>
           </input>
-          <label>Favorite:</label>
+          {/* <label>Favorite:</label>
           <input
             name='favorite'
             type='checkbox'
             checked=''
             value={author.favorite && 'checked'}
             onChange={handleInputChange}>
-          </input>
+          </input> */}
           <button
             type='submit'>
               Submit
@@ -75,7 +77,8 @@ const AuthorForm = ({ formTitle }) => {
 };
 
 AuthorForm.propTypes = {
-  formTitle: PropTypes.string.isRequired
+  formTitle: PropTypes.string.isRequired,
+  setAuthors: PropTypes.func
 };
 
 export default AuthorForm;
