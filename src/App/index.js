@@ -29,6 +29,7 @@ function App() {
           lastName={authorInfo.last_name}
           // favorite={authorInfo.favorite}
           setAuthors={setAuthors}
+          email={authorInfo.email}
         />
       ))}
     </div>
