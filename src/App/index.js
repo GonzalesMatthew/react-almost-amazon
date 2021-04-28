@@ -1,37 +1,26 @@
-import React, { useState } from 'react';
-import './App.scss';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import NavBar from '../components/NavBar';
+import { getAuthors } from '../helpers/data/AuthorData';
+import Routes from '../helpers/Routes';
 
 function App() {
-  const [domWriting, setDomWriting] = useState('Nothing Here!');
+  const [authors, setAuthors] = useState([]);
 
-  const handleClick = (e) => {
-    console.warn(`You clicked ${e.target.id}`);
-    setDomWriting(`You clicked ${e.target.id}! Check the Console!`);
-  };
+  useEffect(() => {
+    getAuthors().then((response) => setAuthors(response));
+  }, []);
 
   return (
-    <div className='App'>
-      <h2>INSIDE APP COMPONENT</h2>
-      <div>
-        <button
-          id='this-button'
-          className='btn btn-info'
-          onClick={handleClick}
-        >
-          I am THIS button
-        </button>
-      </div>
-      <div>
-        <button
-          id='that-button'
-          className='btn btn-primary mt-3'
-          onClick={handleClick}
-        >
-          I am THAT button
-        </button>
-      </div>
-      <h3>{domWriting}</h3>
-    </div>
+    <>
+      <Router>
+        <NavBar />
+        <Routes
+          authors={authors}
+          setAuthors={setAuthors}
+        />
+      </Router>
+    </>
   );
 }
 
