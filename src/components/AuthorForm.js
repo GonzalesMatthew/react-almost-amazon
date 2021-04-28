@@ -32,12 +32,8 @@ const AuthorForm = (
   const handleSubmit = (e) => {
     e.preventDefault();
     if (author.firebaseKey) {
-      console.warn('We are updating');
-      console.warn(author.firebaseKey);
       updateAuthor(author).then((authorsArray) => setAuthors(authorsArray));
     } else {
-      console.warn('We are adding');
-      console.warn(author.firebaseKey);
       addAuthor(author).then((authorsArray) => setAuthors(authorsArray));
     }
   };

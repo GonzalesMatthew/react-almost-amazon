@@ -22,7 +22,6 @@ const addAuthor = (author) => new Promise((resolve, reject) => {
 });
 
 const deleteAuthor = (firebaseKey) => new Promise((resolve, reject) => {
-  console.warn(firebaseKey);
   axios.delete(`${dbUrl}/authors/${firebaseKey}.json`)
     .then(() => getAuthors().then(resolve))
     .catch((error) => reject(error));
