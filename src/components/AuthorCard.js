@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   Button,
   Card,
@@ -20,6 +21,7 @@ const AuthorCard = (
   }
 ) => {
   const [editing, setEditing] = useState(false);
+  const history = useHistory();
 
   const handleClick = (type) => {
     switch (type) {
@@ -29,6 +31,9 @@ const AuthorCard = (
         break;
       case 'edit':
         setEditing((prevState) => !prevState);
+        break;
+      case 'view':
+        history.push(`/authors/${firebaseKey}`);
         break;
       default:
         console.warn('nothing selected');
@@ -41,6 +46,7 @@ const AuthorCard = (
       <CardText>Favorite:
         {/* {favorite} */}
       </CardText>
+      <Button color="warning" onClick={() => handleClick('view')}>View Author</Button>
       <Button color="danger" onClick={() => handleClick('delete')}>Delete Author</Button>
       <Button color="info" onClick={() => handleClick('edit')}>
         {editing ? 'Close Form' : 'Edit Author'}
