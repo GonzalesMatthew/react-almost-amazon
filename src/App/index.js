@@ -42,6 +42,7 @@ function App() {
         <Routes
           authors={authors}
           setAuthors={setAuthors}
+          user={user}
         />
     </>
   );
